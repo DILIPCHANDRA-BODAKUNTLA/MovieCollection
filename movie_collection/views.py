@@ -32,7 +32,7 @@ class RegisterAPI(GenericViewSet, CreateModelMixin):
         if ser.is_valid(raise_exception=True):
             user = ser.save()
             refresh = RefreshToken.for_user(user)
-            return Response({'refresh_token': str(refresh), 'access_token': str(refresh.access_token)}, status=200)
+            return Response({'refresh_token': str(refresh), 'access_token': str(refresh.access_token)}, status=201)
         return Response(ser.errors, status=500)
 
     @action(methods=['POST'], detail=False, url_path="generate_token")

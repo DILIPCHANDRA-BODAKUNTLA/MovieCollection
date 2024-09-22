@@ -10,3 +10,6 @@ sqlparse==0.5.1
 typing_extensions==4.12.2
 urllib3==1.26.20
 wheel==0.38.4
+pytest==8.3.2
+pytest-django==4.5.2
+
