@@ -19,6 +19,9 @@ def get_access_token(user_id):
 
 
 class UserCollectionTest(APITestCase):
+    """
+    here using pytest for unit test case,for testing purpose testing database need to setup,but now using the same database for testing and storing realtime data also.
+    """
 
     @classmethod
     def setUpClass(cls):
@@ -78,10 +81,8 @@ class UserCollectionTest(APITestCase):
         resp = self.client.post(path=self.collections_path, data=data, format="json")
         self.assertEqual(resp.status_code, 201)
         created_obj_from_db = None
-        print("durrrr")
         if resp.status_code == 201:
             resp_data = resp.data
-            print("eeww", resp_data)
             collection_id = resp_data.get("id")
             created_obj_from_db = Collection.objects.filter(id=collection_id).first()
             if created_obj_from_db:
@@ -115,7 +116,6 @@ class UserCollectionTest(APITestCase):
             put_resp = self.client.put(path='{}{}/'.format(self.collections_path, created_obj_from_db.id), data=put_data,
                                        format="json")
             put_resp_data = put_resp.data
-            print(put_resp_data)
             self.assertEqual(put_resp.status_code, 200)
             if put_resp.status_code==200:
                 self.assertEqual(put_data.get("title"), put_resp_data.get("title"))
